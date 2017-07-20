@@ -81,7 +81,7 @@ public class enemyAttackCollider : MonoBehaviour {
         {
             if (transform.root.name.Contains("Attack"))
             {
-                col.GetComponent<Movement>().hitMove();
+                col.GetComponent<Movement>().hitMove(transform.position.x);
                 col.GetComponent<playerHealth>().playerHit = true;
 
                 if (transform.root.name.Contains("Ramo"))

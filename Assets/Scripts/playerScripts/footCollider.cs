@@ -28,7 +28,7 @@ public class footCollider : MonoBehaviour {
         {
             if (col.tag == "Enemy")
             {
-                transform.root.GetComponent<Movement>().hitMove();
+                transform.root.GetComponent<Movement>().hitMove(col.transform.position.x);
             }
         }
     }

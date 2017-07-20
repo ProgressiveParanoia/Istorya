@@ -36,10 +36,11 @@ public class Movement : MonoBehaviour {
         zPosition = transform.position.z;
         facingRight = true;
     }
-	
-	// Update is called once per frame
+
 	void Update () {
         move();
+
+        Debug.Log("Facing right:" + facingRight);
 	}
 
     void move()
@@ -52,7 +53,7 @@ public class Movement : MonoBehaviour {
             playerDirection = new Vector3(leftRight, 0, 0);
 
             GetComponent<Animator>().SetBool("grounded", true);
-
+            
             if (Input.GetKey(KeyCode.Space))
             {
                 GetComponent<Animator>().SetBool("grounded", false);
@@ -111,15 +112,17 @@ public class Movement : MonoBehaviour {
         }
     }
 
-    public void hitMove()
+    public void hitMove(float enemyPositionX)
     {
         footCollider.GetComponent<footCollider>().grounded = false;
 
-        if (facingRight)
+        if (enemyPositionX > transform.position.x)
         {
             playerDirection = new Vector3(-playerSpeed , playerSpeed, 0);
             playerCont.Move(playerDirection * Time.deltaTime);
-        }else
+        }
+
+        if(enemyPositionX < transform.position.x)
         {
             playerDirection = new Vector3(playerSpeed , playerSpeed, 0);
             playerCont.Move(playerDirection * Time.deltaTime);
